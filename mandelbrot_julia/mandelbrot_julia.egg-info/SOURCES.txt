@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+readme.md
+setup.cfg
+setup.py
+mandelbrot_julia/__init__.py
+mandelbrot_julia/__main__.py
+mandelbrot_julia/fractal.py
+mandelbrot_julia/julia_plot.py
+mandelbrot_julia/mandelbrot_plot.py
+mandelbrot_julia/utils.py
+mandelbrot_julia.egg-info/PKG-INFO
+mandelbrot_julia.egg-info/SOURCES.txt
+mandelbrot_julia.egg-info/dependency_links.txt
+mandelbrot_julia.egg-info/entry_points.txt
+mandelbrot_julia.egg-info/requires.txt
+mandelbrot_julia.egg-info/top_level.txt

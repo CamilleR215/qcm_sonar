@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: mandelbrot_julia
+Version: 1.0
+Summary: Permet d afficher les ensembles de Mandelbrot et Julia
+Author: Camille Revol
+Author-email: camille.revol@eleves.ec-nantes.fr
+Requires-Python: >=3.8
+Description-Content-Type: "text/markdown"
+Requires-Dist: pytest
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+
+# mandelbrot_julia
+
+mandelbrot_julia est une librairie Python pour générer des représentations graphiques des ensembles de Mandelbrot et de Julia.
+
+L'ensemble de Mandelbrot est constité des valeurs de c qui vérifient que la suite z_n+1 = z_n**2 + c avec z_0 = 0 converge.
+
+L'ensemble de Julia pour une valeur de c donnée est constité des valeurs de z_0 qui vérifient que la suite z_n+1 = z_n**2 + c converge.
+
+Pour évaluer cela, on testera un nombre maximum d'itérations de la suite z_n et on vérifiera que toutes les valeurs obtenues sont inférieures ou égales à 2.
+
+## Installation
+
+Utiliser le gestionnaire de paquets [pip](https://pip.pypa.io/en/stable/) pour installer mandelbrot_julia
+
+```bash
+pip install mandelbrot_julia
+```
+
+## Usage
+
+```python
+import mandelbrot_julia
+
+# show Mandelbrot ensemble
+plot_mandelbrot(zmin, zmax, pixel_size, max_iter, figname)
+"""avec
+- zmin : valeur complexe du point en bas à gauche du graphique
+- zmax : valeur complexe du point en haut à droite du graphique
+- pixel_size : la taille d'un pixel
+- max_iter : la valeur maximale d'itération de la suite pour trouver si un élément appartient à l'ensemble
+- figname : le nom sous lequel sauvegarder la figure générée
+"""
+# show a Julia ensemble
+plot_julia(c, zmin, zma, pixel_size, max_iter, figname)
+"""avec
+- c : la valeur du paramètre c dans la suite : z_n+1 = z_n**2 + c
+- zmin : valeur complexe du point en bas à gauche du graphique
+- zmax : valeur complexe du point en haut à droite du graphique
+- pixel_size : la taille d'un pixel
+- max_iter : la valeur maximale d'itération de la suite pour trouver si un élément appartient à l'ensemble
+- figname : le nom sous lequel sauvegarder la figure générée
+"""

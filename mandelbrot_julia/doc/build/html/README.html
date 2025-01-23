@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>mandelbrot_julia &#8212; Documentation mandelbrot_julia </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
+    
+    <script src="_static/documentation_options.js?v=d1a510d7"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=e6b791cb"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="mandelbrot_julia" href="modules.html" />
+    <link rel="prev" title="Welcome to mandelbrot_julia documentation!" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="mandelbrot_julia"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to mandelbrot_julia documentation!"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation mandelbrot_julia </a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">mandelbrot_julia</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="mandelbrot-julia">
+<h1>mandelbrot_julia<a class="headerlink" href="#mandelbrot-julia" title="Lien vers cette rubrique">¶</a></h1>
+<p>mandelbrot_julia est une librairie Python pour générer des représentations graphiques des ensembles de Mandelbrot et de Julia.</p>
+<p>L’ensemble de Mandelbrot est constité des valeurs de c qui vérifient que la suite <span class="math notranslate nohighlight">\(z_{n+1} =  {z_n}^2 + c\)</span> avec <span class="math notranslate nohighlight">\(z_0 = 0\)</span> converge.</p>
+<p>L’ensemble de Julia pour une valeur de c donnée est constité des valeurs de <span class="math notranslate nohighlight">\(z_0\)</span> qui vérifient que la suite <span class="math notranslate nohighlight">\(z_{n+1} =  {z_n}^2 + c\)</span> converge.</p>
+<p>Pour évaluer cela, on testera un nombre maximum d’itérations de la suite <span class="math notranslate nohighlight">\(z_n\)</span> et on vérifiera que toutes les valeurs obtenues sont inférieures ou égales à 2.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Lien vers cette rubrique">¶</a></h2>
+<p>Utiliser le gestionnaire de paquets <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> pour installer mandelbrot_julia</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mandelbrot_julia
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Lien vers cette rubrique">¶</a></h2>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Lien vers cette rubrique">¶</a></h3>
+<p>Depuis Python on peut utiliser</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mandelbrot_julia</span>
+</pre></div>
+</div>
+<section id="tester-si-une-valeur-appartient-a-l-ensemble-de-mandelbrot">
+<h4>Tester si une valeur appartient à l’ensemble de Mandelbrot<a class="headerlink" href="#tester-si-une-valeur-appartient-a-l-ensemble-de-mandelbrot" title="Lien vers cette rubrique">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">is_in_Mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>avec</p>
+<ul class="simple">
+<li><p>c : valeur du paramètre candidat à l’ensemble de Mandelbrot</p></li>
+<li><p>max_iter : (default : 100): la valeur maximale d’itération de la suite pour trouver si un élément appartient à l’ensemble</p></li>
+</ul>
+</section>
+<section id="generer-et-sauvegarder-le-graphique-de-l-ensemble-de-mandelbrot">
+<h4>Génèrer et sauvegarder le graphique de l’ensemble de Mandelbrot<a class="headerlink" href="#generer-et-sauvegarder-le-graphique-de-l-ensemble-de-mandelbrot" title="Lien vers cette rubrique">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_mandelbrot</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">,</span> <span class="n">pixel_size</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">figname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>avec</p>
+<ul class="simple">
+<li><p>zmin (default : -2 -2j): valeur complexe du point en bas à gauche du graphique</p></li>
+<li><p>zmax (default : 2 + 2j): valeur complexe du point en haut à droite du graphique</p></li>
+<li><p>pixel_size (default : 5e-4): la taille d’un pixel</p></li>
+<li><p>max_iter (default : 100): la valeur maximale d’itération de la suite pour trouver si un élément appartient à l’ensemble</p></li>
+<li><p>figname (default : « Mandelbrot.png »): le nom sous lequel sauvegarder la figure générée</p></li>
+</ul>
+</section>
+<section id="tester-si-une-valeur-appartient-a-l-ensemble-de-julia">
+<h4>Tester si une valeur appartient à l’ensemble de Julia<a class="headerlink" href="#tester-si-une-valeur-appartient-a-l-ensemble-de-julia" title="Lien vers cette rubrique">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">is_in_Mandelbrot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>avec</p>
+<ul class="simple">
+<li><p>z : valeur initiale de la suite <span class="math notranslate nohighlight">\(z_{n+1} =  {z_n}^2 + c\)</span> candidate à l’ensemble de Julia</p></li>
+<li><p>c : valeur du paramètre c dans la suite <span class="math notranslate nohighlight">\(z_{n+1} =  {z_n}^2 + c\)</span></p></li>
+<li><p>max_iter : (default : 100): la valeur maximale d’itération de la suite pour trouver si un élément appartient à l’ensemble</p></li>
+</ul>
+</section>
+<section id="generer-et-sauvegarder-le-graphique-de-l-ensemble-de-julia">
+<h4>Génèrer et sauvegarder le graphique de l’ensemble de Julia<a class="headerlink" href="#generer-et-sauvegarder-le-graphique-de-l-ensemble-de-julia" title="Lien vers cette rubrique">¶</a></h4>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_julia</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">,</span> <span class="n">pixel_size</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">figname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>pip install mandelbrot_julia
+avec</p>
+<ul class="simple">
+<li><p>c (default : -0.8+0.156j) : la valeur du paramètre c dans la suite : <span class="math notranslate nohighlight">\(z_{n+1} =  {z_n}^2 + c\)</span></p></li>
+<li><p>zmin (default : -2 -1j): valeur complexe du point en bas à gauche du graphique</p></li>
+<li><p>zmax (default : 2 + 1j): valeur complexe du point en haut à droite du graphique</p></li>
+<li><p>pixel_size (default : 5e-4): la taille d’un pixel</p></li>
+<li><p>max_iter (default : 100): la valeur maximale d’itération de la suite pour trouver si un élément appartient à l’ensemble</p></li>
+<li><p>figname (default : « Julia.png »): le nom sous lequel sauvegarder la figure générée</p></li>
+</ul>
+</section>
+</section>
+<section id="terminal">
+<h3>Terminal<a class="headerlink" href="#terminal" title="Lien vers cette rubrique">¶</a></h3>
+<p>On peut aussi directement appeler ces fonctions avec des lignes de commande:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-MandelbrotPlot<span class="w"> </span>--zmin<span class="o">=</span>...<span class="w"> </span>--zmax<span class="o">=</span>...<span class="w"> </span>--pixel_size<span class="o">=</span>...<span class="w"> </span>--max-iter<span class="o">=</span>...<span class="w"> </span>-o<span class="w"> </span>...
+</pre></div>
+</div>
+<p>avec :</p>
+<ul class="simple">
+<li><p>–zmin (default : -2 -2j): valeur complexe du point en bas à gauche du graphique</p></li>
+<li><p>–zmax (default : 2 + 2j): valeur complexe du point en haut à droite du graphique</p></li>
+<li><p>–pixel_size (default : 5e-4): la taille d’un pixel</p></li>
+<li><p>–max-iter (default : 100): la valeur maximale d’itération de la suite pour trouver si un élément appartient à l’ensemble</p></li>
+<li><p>-o (default : « Mandelbrot.png »): le nom sous lequel sauvegarder la figure générée</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-JuliaPlot<span class="w"> </span>-c<span class="o">=</span>...<span class="w"> </span>--zmin<span class="o">=</span>...<span class="w"> </span>--zmax<span class="o">=</span>...<span class="w"> </span>--pixel_size<span class="o">=</span>...<span class="w"> </span>--max-iter<span class="o">=</span>...<span class="w"> </span>-o<span class="w"> </span>...
+</pre></div>
+</div>
+<p>avec :</p>
+<ul class="simple">
+<li><p>-c (default : -0.3j): la valeur du paramètre c dans la suite : <span class="math notranslate nohighlight">\(z_{n+1} =  {z_n}^2 + c\)</span></p></li>
+<li><p>–zmin (default : -2 - 2j): valeur complexe du point en bas à gauche du graphique</p></li>
+<li><p>–zmax (default : 2 + 2j): valeur complexe du point en haut à droite du graphique</p></li>
+<li><p>–pixel_size (default : 5e-4): la taille d’un pixel</p></li>
+<li><p>–max-iter (default : 100): la valeur maximale d’itération de la suite pour trouver si un élément appartient à l’ensemble</p></li>
+<li><p>-o (default : « Julia.png »): le nom sous lequel sauvegarder la figure générée</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table des matières</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">mandelbrot_julia</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#python">Python</a><ul>
+<li><a class="reference internal" href="#tester-si-une-valeur-appartient-a-l-ensemble-de-mandelbrot">Tester si une valeur appartient à l’ensemble de Mandelbrot</a></li>
+<li><a class="reference internal" href="#generer-et-sauvegarder-le-graphique-de-l-ensemble-de-mandelbrot">Génèrer et sauvegarder le graphique de l’ensemble de Mandelbrot</a></li>
+<li><a class="reference internal" href="#tester-si-une-valeur-appartient-a-l-ensemble-de-julia">Tester si une valeur appartient à l’ensemble de Julia</a></li>
+<li><a class="reference internal" href="#generer-et-sauvegarder-le-graphique-de-l-ensemble-de-julia">Génèrer et sauvegarder le graphique de l’ensemble de Julia</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#terminal">Terminal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Sujet précédent</h4>
+    <p class="topless"><a href="index.html"
+                          title="Chapitre précédent">Welcome to mandelbrot_julia documentation!</a></p>
+  </div>
+  <div>
+    <h4>Sujet suivant</h4>
+    <p class="topless"><a href="modules.html"
+                          title="Chapitre suivant">mandelbrot_julia</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/README.md.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="mandelbrot_julia"
+             >suivant</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to mandelbrot_julia documentation!"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Documentation mandelbrot_julia </a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">mandelbrot_julia</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Leonard Nader et Camille Revol.
+      Créé en utilisant <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

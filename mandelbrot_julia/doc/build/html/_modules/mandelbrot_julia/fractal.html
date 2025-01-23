@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mandelbrot_julia.fractal &#8212; Documentation mandelbrot_julia </title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bizstyle.css?v=5283bb3d" />
+    
+    <script src="../../_static/documentation_options.js?v=d1a510d7"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentation mandelbrot_julia </a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Code du module</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">mandelbrot_julia.fractal</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Code source de mandelbrot_julia.fractal</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="viewcode-block" id="Fractal">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Fractal">[docs]</a>
+<span class="k">class</span> <span class="nc">Fractal</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_iter</span> <span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crée une instance de la classe fractale</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_iter : int</span>
+<span class="sd">            vérification que les n_iter premiers éléments de la suite sont contenus dans le cercle complexe de rayon 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_iter</span> <span class="o">=</span> <span class="n">n_iter</span>
+    
+<div class="viewcode-block" id="Fractal.suite">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Fractal.suite">[docs]</a>
+    <span class="k">def</span> <span class="nf">suite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">complex</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Générateur des éléments de la suite $z_{n+1}=z_n^2+c$</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        z : complex</span>
+<span class="sd">            valeur initiale de la suite</span>
+<span class="sd">        c : complex</span>
+<span class="sd">            paramètre de la suite</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">z</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">c</span></div>
+
+
+<div class="viewcode-block" id="Fractal.is_in_ensemble">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Fractal.is_in_ensemble">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_in_ensemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifie si les self.n_iter premiers éléments de la suite sont contenus dans le cercle complexe de rayon 2, en se limitant à un nombre maximal d&#39;itérations.</span>
+
+<span class="sd">        Parameters </span>
+<span class="sd">        ----------</span>
+<span class="sd">        z : complex or complex ndarray</span>
+<span class="sd">            valeur(s) initiale(s) de la suite</span>
+<span class="sd">        c : complex or complex ndarray</span>
+<span class="sd">            paramètre(s) c de la suite z_n+1 = z_n**2 + c</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        bool</span>
+<span class="sd">            vrai si les self.n_iter premiers éléments de la suite sont contenus dans le cercle complexe de rayon 2, faux sinon</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#On répète les valeurs z_n ou de c si nécessaire, pour obtenir des ndarrays de même forme</span>
+        <span class="n">z_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="k">else</span> <span class="n">z</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">else</span> <span class="n">c</span>
+        <span class="c1">#On crée un masque pour ne calculer que les valeurs de Z_n des points encore dans le cercle</span>
+        <span class="n">masque</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">z_n</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iter</span><span class="p">):</span>
+            <span class="n">z_n</span><span class="p">[</span><span class="n">masque</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_n</span><span class="p">[</span><span class="n">masque</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="n">masque</span><span class="p">]</span>
+            <span class="c1">#A chaque itération, on va recalculer le masque, </span>
+            <span class="c1">#il ne sera vrai que pour les couples (z0, c) qui vérifient: z_n &lt; 2</span>
+            <span class="n">masque</span><span class="p">[</span><span class="n">masque</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z_n</span><span class="p">[</span><span class="n">masque</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">2</span> 
+        <span class="k">return</span> <span class="n">masque</span></div>
+</div>
+
+        
+<div class="viewcode-block" id="Mandelbrot">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Mandelbrot">[docs]</a>
+<span class="k">class</span> <span class="nc">Mandelbrot</span><span class="p">(</span><span class="n">Fractal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_iter</span> <span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crée une instance de la classe Mandelbrot</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_iter : int</span>
+<span class="sd">            nombre d&#39;itération du calcul de la suite pour vérifier que l&#39;élément appartient à l&#39;ensemble de Mandelbrot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span>
+    
+    
+<div class="viewcode-block" id="Mandelbrot.is_in_ensemble">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Mandelbrot.is_in_ensemble">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_in_ensemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifie si le(s) élément(s) c est(sont) dans l&#39;ensemble de Mandelbrot, en se limitant à un nombre maximal d&#39;itérations = self.n_iter.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters </span>
+<span class="sd">        ----------</span>
+<span class="sd">        c : complex or complex ndarray</span>
+<span class="sd">            nombre(s) candidat(s) pour l&#39;ensemble de Mandelbrot</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        --------</span>
+<span class="sd">        bool or bool ndarray</span>
+<span class="sd">            vrai si les  self.n_iter premiers éléments sont contenus dans le cercle complexe de rayon 2, faux sinon</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; mandelbrot_50 = Mandelbrot(50)</span>
+<span class="sd">        &gt;&gt;&gt; mandelbrot_100 = Mandelbrot(100)</span>
+<span class="sd">        &gt;&gt;&gt; c = 0.251</span>
+<span class="sd">        &gt;&gt;&gt; liste_x = [-1, -0.7, -0.3, 0, 0.3, 0.7, 1]</span>
+<span class="sd">        &gt;&gt;&gt; liste_y = [-1, -0.7, -0.3, 0, 0.3, 0.7, 1]</span>
+<span class="sd">        &gt;&gt;&gt; X, Y = np.meshgrid(liste_x, liste_y)</span>
+<span class="sd">        &gt;&gt;&gt; c_array = X +1j * Y</span>
+<span class="sd">        &gt;&gt;&gt; print(mandelbrot_50.is_in_ensemble(c), mandelbrot_100.is_in_ensemble(c), mandelbrot_100.is_in_ensemble(c_array))</span>
+<span class="sd">        True False [[False False False  True False False False]</span>
+<span class="sd">         [False False False False False False False]</span>
+<span class="sd">         [False False  True  True  True False False]</span>
+<span class="sd">         [ True  True  True  True False False False]</span>
+<span class="sd">         [False False  True  True  True False False]</span>
+<span class="sd">         [False False False False False False False]</span>
+<span class="sd">         [False False False  True False False False]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#On distingue les cas où on souhaite connaître le résultat pour une seule valeur de c, ou pour plusieurs</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">is_in_ensemble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">is_in_ensemble</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span></div>
+</div>
+
+    
+
+<div class="viewcode-block" id="Julia">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Julia">[docs]</a>
+<span class="k">class</span> <span class="nc">Julia</span><span class="p">(</span><span class="n">Fractal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_iter</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">c</span> <span class="p">:</span> <span class="nb">complex</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crée une instance de la classe Julia</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_iter : int</span>
+<span class="sd">            nombre d&#39;itération du calcul de la suite pour vérifier que l&#39;élément appartient à l&#39;ensemble de Julia</span>
+<span class="sd">        c : complex</span>
+<span class="sd">            valeur du paramètre c dans le calcul de la suite : z_n+1 = z_n**2 + c</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+
+    
+<div class="viewcode-block" id="Julia.is_in_ensemble">
+<a class="viewcode-back" href="../../mandelbrot_julia.html#mandelbrot_julia.fractal.Julia.is_in_ensemble">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_in_ensemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifie si le(s) élément(s) z est(sont) dans l&#39;ensemble de Julia de paramètre c = self.c, en se limitant à un nombre maximal d&#39;itérations = self.n_iter.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        z : complex or complex ndarray</span>
+<span class="sd">            Valeur(s) initiale(s) candidate(s) pour l&#39;ensemble de Julia</span>
+<span class="sd">        </span>
+<span class="sd">        Return</span>
+<span class="sd">        --------</span>
+<span class="sd">        bool or bool ndarray</span>
+<span class="sd">            vrai si les self.n_iter premiers éléments sont contenus dans le cercle complexe de rayon 2, faux sinon</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; julia_100 = Julia(100, 0.25)</span>
+<span class="sd">        &gt;&gt;&gt; julia_200 = Julia(200, 0.25)</span>
+<span class="sd">        &gt;&gt;&gt; z = 0.25 + 0.25j</span>
+<span class="sd">        &gt;&gt;&gt; liste_x = [-1, -0.7, -0.3, 0, 0.3, 0.7, 1]</span>
+<span class="sd">        &gt;&gt;&gt; liste_y = [-1, -0.7, -0.3, 0, 0.3, 0.7, 1]</span>
+<span class="sd">        &gt;&gt;&gt; X, Y = np.meshgrid(liste_x, liste_y)</span>
+<span class="sd">        &gt;&gt;&gt; z_array = X +1j * Y</span>
+<span class="sd">        &gt;&gt;&gt; print(julia_200.is_in_ensemble(z), julia_100.is_in_ensemble(50), julia_100.is_in_ensemble(z_array))</span>
+<span class="sd">        True False [[False False  True False  True False False]</span>
+<span class="sd">         [False  True  True  True  True  True False]</span>
+<span class="sd">         [False  True  True  True  True  True False]</span>
+<span class="sd">         [False False  True  True  True False False]</span>
+<span class="sd">         [False  True  True  True  True  True False]</span>
+<span class="sd">         [False  True  True  True  True  True False]</span>
+<span class="sd">         [False False  True False  True False False]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#On distingue les cas où on souhaite connaître le résultat pour une seule valeur de z, ou pour plusieurs</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">is_in_ensemble</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">z</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">is_in_ensemble</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Documentation mandelbrot_julia </a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Code du module</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">mandelbrot_julia.fractal</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Leonard Nader et Camille Revol.
+      Créé en utilisant <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
